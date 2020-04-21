@@ -24,7 +24,6 @@ app.post("/subscription", (req, res) => {
   console.log(subscription);
   fakeDatabase.push(subscription);
   res.status(200).json({ data: fakeDatabase });
-  // sendNotification();
 });
 
 app.post("/sendNotification", (req, res) => {
