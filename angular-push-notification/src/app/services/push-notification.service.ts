@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 
-// const SERVER_URL = environment.server_url;
-const SERVER_URL = 'http://localhost:3001';
+const SERVER_URL = environment.server_url;
+// const SERVER_URL = 'http://localhost:300';
 
 @Injectable({
   providedIn: 'root',

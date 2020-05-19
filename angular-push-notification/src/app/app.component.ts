@@ -4,7 +4,8 @@ import { environment } from 'src/environments/environment.prod';
 import { PushNotificationService } from './services/push-notification.service';
 
 const VAPID_PUBLIC =
-  'BGIYpBjwj0_9fsc8TRDwpoV6PDUgl-NoX1uubkVYCasZvPzHssLEDdHW3_zhHAW9pQXTMSZrUk1ynVXgMkt8GFM';
+  'BPTAMQXW2VfikrkGYBK79kbwefRaLPI80qruM48C8118-_rcmavi0Nt3MXrKaxV0F7lhJkdAZQuN97I0yuYzwx4';
+// 'BGIYpBjwj0_9fsc8TRDwpoV6PDUgl-NoX1uubkVYCasZvPzHssLEDdHW3_zhHAW9pQXTMSZrUk1ynVXgMkt8GFM';
 // const VAPID_PUBLIC = environment.publicKey;
 
 @Component({
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit {
     if (this.swPush.isEnabled) {
       this.swPush
         .requestSubscription({
-          serverPublicKey: VAPID_PUBLIC,
+          serverPublicKey:
+            'BKO8KCPAONxPNJZj4vB3XwBn-sh0-RVzbazTcQNcBIO2bVpnM1AMIx5Vkj3zmwcD81-d9iRthWbdsyaaVK9k6C4',
         })
         .then((subscription) => {
           this.pushService
@@ -40,9 +42,15 @@ export class AppComponent implements OnInit {
   sendNotification() {
     const payload = {
       notification: {
-        title: 'Angular Notification',
-        body: 'This is the body of the notification',
-        icon: 'assets/icons/icon-512x512.png',
+        title: 'StoryBook',
+        body: 'welcome friends',
+        url: 'http://localhost:8080',
+        ttl: 36000,
+        icon:
+          'https://cdn3.iconfinder.com/data/icons/happy-x-mas/501/santa15-128.png',
+        badge:
+          'https://cdn3.iconfinder.com/data/icons/happy-x-mas/501/santa15-128.png',
+        data: 'Hello New World',
       },
     };
     this.pushService

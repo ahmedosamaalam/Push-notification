@@ -5,7 +5,12 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
 
-const { port, mongoURI } = require("./config/config.development");
+const {
+  port,
+  mongoURI,
+  privateVapid,
+  publicVapid,
+} = require("./config/config.development");
 
 require("./models/subscribers_model");
 
@@ -21,46 +26,49 @@ mongoose
 
 //Create Express middleware
 const app = express();
+
+webpush.setVapidDetails(
+  "mailto:example@yourdomain.org",
+  publicVapid,
+  privateVapid
+);
+
 // app.set('trust proxy', true);
 // parse application/json
 app.use(cors());
 app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
+// app.use(
+//   bodyParser.urlencoded({
+//     extended: true,
+//   })
+// );
 
 // Set static folder
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 // app.set('views', __dirname + '/public/js');
 
 //Routes
 
 const index = require("./router");
-const push = require("./router/push");
 const subscribe = require("./router/subscriber");
+const sendNotification = require("./router/push");
 
 // Use Routes
 app.use("/", index);
 app.use("/subscription", subscribe);
-app.use("/sendNotification", push);
+app.use("/sendNotification", sendNotification);
 
 // const fakeDatabase = [];
 // app.post("/subscription", (req, res) => {
 //   const subscription = req.body;
-//   console.log(subscription);
 //   fakeDatabase.push(subscription);
 //   res.status(200).json({ data: fakeDatabase });
-//   // sendNotification();
 // });
 
 // app.post("/sendNotification", (req, res) => {
 //   const notificationPayload = req.body;
-
 //   const promises = [];
-
 //   fakeDatabase.forEach((subscription) => {
 //     promises.push(
 //       webpush.sendNotification(
@@ -69,7 +77,11 @@ app.use("/sendNotification", push);
 //       )
 //     );
 //   });
-//   Promise.all(promises).then(() => res.sendStatus(200));
+//   Promise.all(promises)
+//     .then(() => res.sendStatus(200))
+//     .catch((err) => {
+//       console.log(err);
+//     });
 // });
 
 // app.get("/", (req, res) => {

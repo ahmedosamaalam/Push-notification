@@ -1,19 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
+const Subscription = mongoose.model("subscribers");
 
 router.get("/", (req, res) => {
-  res.locals.metaTags = {
-    title: "web-push-api",
-    description:
-      "Web Push Notification Full Stack Application With Node Js Restful API",
-    keywords:
-      "Web Push Notification Full Stack Application With Node Js Restful API",
-    generator: "0.0.0.1",
-    author: "Ahmed Osama",
-  };
-  res.json({
-    status: "ok",
-    message: "Server is running",
+  Subscription.find({}, (err, subscriptions) => {
+    if (err) {
+      console.error(`Error occurred while getting subscriptions`);
+      res.status(500).json({
+        error: "Technical error occurred",
+      });
+    } else {
+      res.json({
+        status: "ok",
+        message: "Server is running",
+        data: subscriptions,
+      });
+    }
   });
 });
 
