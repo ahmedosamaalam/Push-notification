@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const SubscriberSchema = new Schema({
+  username: String,
   endpoint: String,
   keys: Schema.Types.Mixed,
   createDate: {

@@ -7,6 +7,7 @@ const webPush = require("web-push");
 router.post("/", (req, res) => {
   const notificationPayload = req.body;
 
+  // { username: "osama" }
   Subscription.find({}, (err, subscriptions) => {
     if (err) {
       console.log(`Error occurred while getting subscriptions`);
@@ -14,6 +15,7 @@ router.post("/", (req, res) => {
         error: "Technical error occurred",
       });
     } else {
+      console.log(subscriptions);
       const promises = [];
 
       subscriptions.forEach((subscription) => {
@@ -24,7 +26,8 @@ router.post("/", (req, res) => {
           )
         );
       });
-      Promise.all(promises)
+      const unique = Array.from(promises);
+      Promise.all(unique)
         .then((data) =>
           res.status(200).json({ message: "Push triggered", data: data })
         )
