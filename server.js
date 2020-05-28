@@ -45,8 +45,24 @@ app.use(bodyParser.json());
 // );
 
 // Set static folder
-// app.use(express.static(path.join(__dirname, "public")));
-// app.set('views', __dirname + '/public/js');
+// app.use(express.static(path.join(__dirname, "/angular-push-notification/dist/index.html")));
+// app.set('views', __dirname + '/angular-push-notification/dist/index.html');
+
+// app.use(express.static(path.join(__dirname, "dist")));
+// app.get("*", (req, res) => {
+//   res.sendFile(
+//     path.join(__dirname + "/angular-push-notification/dist/index.html")
+//   );
+// });
+
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.join(
+      __dirname +
+        "/angular-push-notification/dist/angular-push-notifications/index.html"
+    )
+  );
+});
 
 //Routes
 
@@ -55,7 +71,7 @@ const subscribe = require("./router/subscriber");
 const sendNotification = require("./router/push");
 
 // Use Routes
-app.use("/", index);
+app.use("/list", index);
 app.use("/subscription", subscribe);
 app.use("/sendNotification", sendNotification);
 

@@ -22,21 +22,22 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.swPush.isEnabled) {
-      this.swPush
-        .requestSubscription({
-          serverPublicKey:
-            'BKO8KCPAONxPNJZj4vB3XwBn-sh0-RVzbazTcQNcBIO2bVpnM1AMIx5Vkj3zmwcD81-d9iRthWbdsyaaVK9k6C4',
-        })
-        .then((subscription) => {
-          this.pushService
-            .sendSubscriptionToTheServer('subscription', subscription)
-            .subscribe((res) => {
-              console.log(res);
-            });
-        })
-        .catch(console.error);
-    }
+    // console.log('123');
+    // if (this.swPush.isEnabled) {
+    //   this.swPush
+    //     .requestSubscription({
+    //       serverPublicKey:
+    //         'BKO8KCPAONxPNJZj4vB3XwBn-sh0-RVzbazTcQNcBIO2bVpnM1AMIx5Vkj3zmwcD81-d9iRthWbdsyaaVK9k6C4',
+    //     })
+    //     .then((subscription) => {
+    //       this.pushService
+    //         .sendSubscriptionToTheServer('subscription', subscription)
+    //         .subscribe((res) => {
+    //           console.log(res);
+    //         });
+    //     })
+    //     .catch(console.error);
+    // }
   }
 
   sendNotification() {

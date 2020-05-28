@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_local": "ng build --prod --output-hashing=none && cd dist/angular-push-notifications && http-server"
+    "build_local": "ng build --prod --output-hashing=none && cd dist/angular-push-notifications && http-server --port 8090",
+    "server_local": "cd dist/angular-push-notifications && http-server --port 8090"
   },
   "private": true,
   "dependencies": {

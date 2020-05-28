@@ -6,12 +6,15 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PushNotificationService } from './services/push-notification.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { rootRouterConfig } from './app.routing';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
+    RouterModule.forRoot(rootRouterConfig),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
